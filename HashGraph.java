@@ -198,6 +198,14 @@ public class HashGraph<S, T> {
      * @return The shortest path from start to destination.
      */
     public List<String> shortestPath(String startLabel, String destLabel, EdgeMeasure<T> measure) {
+        if (null == startLabel || null == destLabel || null == measure) {
+            throw new NullPointerException("All parameters to shortestPath must be non-null");
+        }
+
+        if (!labelToVertex.containsKey(startLabel) || !labelToVertex.containsKey(destLabel)) {
+            throw new IllegalArgumentException("For method shortestPath, both vertices must be in the graph");
+        }
+
         return null;
     }
 
