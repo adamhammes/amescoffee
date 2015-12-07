@@ -14,7 +14,7 @@ import java.util.*;
 public class HashGraph<S, T> {
     private boolean isDirected = false;
 
-    private HashMap<String, Vertex<S, T>> labelToVertex = new HashMap<>();
+    private Map<String, Vertex<S, T>> labelToVertex = new HashMap<>();
 
     public HashGraph(boolean isDirected) {
         this.isDirected = isDirected;
@@ -102,7 +102,7 @@ public class HashGraph<S, T> {
             throw new IllegalArgumentException("No edge from " + source.label + " to " + dest.label);
         }
 
-        HashMap<Vertex<S, T>, Edge<T>> vertexToEdge = source.vertexToEdge;
+        Map<Vertex<S, T>, Edge<T>> vertexToEdge = source.vertexToEdge;
         return vertexToEdge.get(dest).data;
     }
 

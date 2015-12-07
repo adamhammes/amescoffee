@@ -2,11 +2,12 @@ package cs311.hw7;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Vertex<S, T> {
     public String label;
     public S data;
-    public final HashMap<Vertex<S, T>, Edge<T>> vertexToEdge = new HashMap<Vertex<S, T>, Edge<T>>();
+    public final Map<Vertex<S, T>, Edge<T>> vertexToEdge = new HashMap<Vertex<S, T>, Edge<T>>();
 
     public Vertex(String label, S data) {
         this.label = label;
