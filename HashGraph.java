@@ -218,6 +218,10 @@ public class HashGraph<S, T> {
      *                in the graph.
      */
     public Graph<S, T> minimumSpanningTree(EdgeMeasure<T> measure) {
+        if (null == measure) {
+            throw new NullPointerException("Cannot have null measure in minimumSpanningTree");
+        }
+
         return null;
     }
 
