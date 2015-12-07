@@ -20,7 +20,7 @@ package cs311.hw7;
  *
  * @param <T> The type of edge data stored in the graph.
  */
-public interface IEdgeMeasure<T> {
+public interface EdgeMeasure<T> {
     /**
      * Computes the cost (sometimes referred to as the
      * weight) of the edge.

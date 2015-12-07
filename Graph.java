@@ -1,7 +1,8 @@
 
 package cs311.hw7;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * A simple generic graph data structure in which every vertex
@@ -12,21 +13,12 @@ import java.util.*;
  * @param <S> The type of data stored in every VERTEX.
  * @param <T> The type of data stored in every EDGE.
  */
-public class Graph<S, T> {
-    private boolean isDirected = false;
-
-    private HashMap<String, Vertex<S, T>> labelToVertex = new HashMap<>();
-
-    public Graph(boolean isDirected) {
-        this.isDirected = isDirected;
-    }
+public interface Graph<S, T> {
     /**
      * If this returns true, the graph is a directed
      * graph. If false, it is undirected.
      */
-    public boolean isDirected() {
-        return isDirected;
-    }
+    public boolean isDirected();
 
     /**
      * Adds a new vertex to the graph that is identified by the
@@ -35,10 +27,7 @@ public class Graph<S, T> {
      * @param vertexLabel The identifying label of the graph.
      * @param vertexData  The data attached to the vertex.
      */
-    public void addVertex(String vertexLabel, S vertexData) {
-        Vertex<S, T> v = new Vertex<>(vertexLabel, vertexData);
-        labelToVertex.put(vertexLabel, v);
-    }
+    public void addVertex(String vertexLabel, S vertexData);
 
     /**
      * Removes the vertex and all edges associated with it
@@ -46,18 +35,7 @@ public class Graph<S, T> {
      *
      * @param vertexLabel The vertex to be removed.
      */
-    public void removeVertex(String vertexLabel) {
-        if (!labelToVertex.containsKey(vertexLabel)) {
-            return;
-        }
-
-        Vertex toRemove = labelToVertex.get(vertexLabel);
-        labelToVertex.remove(toRemove.label);
-
-        for (Vertex v: labelToVertex.values()) {
-            v.removeVertex(toRemove);
-        }
-    }
+    public void removeVertex(String vertexLabel);
 
     /**
      * Adds an edge to the graph from the source vertex to the
@@ -74,16 +52,7 @@ public class Graph<S, T> {
      *                    the edge.
      * @param edgeData    The data attached to the edge.
      */
-    public void addEdge(String sourceLabel, String targetLabel, T edgeData) {
-        if (!labelToVertex.containsKey(sourceLabel) || !labelToVertex.containsKey(targetLabel)) {
-            throw new IllegalArgumentException("Vertices must already be in graph to add edge");
-        }
-
-        Vertex<S, T> source = labelToVertex.get(sourceLabel);
-        Vertex<S, T> dest = labelToVertex.get(targetLabel);
-
-        source.addEdge(new Edge<>(source, dest, edgeData));
-    }
+    public void addEdge(String sourceLabel, String targetLabel, T edgeData);
 
     /**
      * Returns the edge data associated with this edge.
@@ -91,66 +60,30 @@ public class Graph<S, T> {
      * @param sourceLabel The source vertex of the edge.
      * @param targetLabel The target vertex of the edge.
      */
-    public T getEdgeData(String sourceLabel, String targetLabel) {
-        if (!labelToVertex.containsKey(sourceLabel) || !labelToVertex.containsKey(targetLabel)) {
-            throw new IllegalArgumentException("Vertices must already be in graph to get edge data");
-        }
-
-        Vertex<S, T> source = labelToVertex.get(sourceLabel);
-        Vertex<S, T> dest = labelToVertex.get(targetLabel);
-
-        if (!source.vertexToEdge.containsKey(dest)) {
-            throw new IllegalArgumentException("No edge from " + source.label + " to " + dest.label);
-        }
-
-        HashMap<Vertex<S, T>, Edge<T>> vertexToEdge = source.vertexToEdge;
-        return vertexToEdge.get(dest).data;
-    }
+    public T getEdgeData(String sourceLabel, String targetLabel);
 
     /**
      * Returns the vertex data associated with this vertex.
      *
      * @param label The label of the vertex.
      */
-    public S getVertexData(String label) {
-        if (null == label) {
-            throw new NullPointerException("Label cannot be null in getVertexData");
-        }
-
-        if (!labelToVertex.containsKey(label)) {
-            throw new IllegalArgumentException("No vertex named " + label);
-        }
-
-        return labelToVertex.get(label).data;
-    }
+    public S getVertexData(String label);
 
     /**
      * Returns the number of vertices in the graph.
      */
-    public int getNumVertices() {
-        return labelToVertex.size();
-    }
+    public int getNumVertices();
 
     /**
      * Returns the number of edges in the graph.
      */
-    public int getNumEdges() {
-        int total = 0;
-
-        for (Vertex v: labelToVertex.values()) {
-            total += v.vertexToEdge.size();
-        }
-
-        return total;
-    }
+    public int getNumEdges();
 
     /**
      * Returns a collection of the labels of all the vertices
      * in the graph.
      */
-    public Collection<String> getVertices() {
-        return labelToVertex.keySet();
-    }
+    public Collection<String> getVertices();
 
     /**
      * Returns a collection of all the adjacent vertices of the
@@ -158,32 +91,13 @@ public class Graph<S, T> {
      *
      * @param label The label of the vertex.
      */
-    public Collection<String> getNeighbors(String label) {
-        if (null == label) {
-            throw new NullPointerException("Cannot get neighbors of null label");
-        }
-
-        if (!labelToVertex.containsKey(label)) {
-            throw new IllegalArgumentException("Vertex \"" + label + "\" is not in the graph");
-        }
-
-        Collection<Vertex<S, T>> outgoingVertices = labelToVertex.get(label).getNeighbors();
-        ArrayList<String> labels = new ArrayList<>();
-
-        for (Vertex<S, T> v: outgoingVertices) {
-            labels.add(v.label);
-        }
-
-        return labels;
-    }
+    public Collection<String> getNeighbors(String label);
 
     /**
      * Returns a valid topological sort if the graph is a
      * directed acyclic graph and returns null otherwise.
      */
-    public List<String> topologicalSort() {
-        return null;
-    }
+    public List<String> topologicalSort();
 
     /**
      * Returns the shortest path from the start vertex to
@@ -198,9 +112,7 @@ public class Graph<S, T> {
      *                   of every edge in the graph.
      * @return The shortest path from start to destination.
      */
-    public List<String> shortestPath(String startLabel, String destLabel, IEdgeMeasure<T> measure) {
-        return null;
-    }
+    public List<String> shortestPath(String startLabel, String destLabel, EdgeMeasure<T> measure);
 
     /**
      * Returns a minimum spanning tree for the graph with
@@ -210,9 +122,7 @@ public class Graph<S, T> {
      * @param measure that defines the weight of every edge
      *                in the graph.
      */
-    public IGraph<S, T> minimumSpanningTree(IEdgeMeasure<T> measure) {
-        return null;
-    }
+    public Graph<S, T> minimumSpanningTree(EdgeMeasure<T> measure);
 
     /**
      * Computes the total cost of the graph. The total cost is
@@ -221,15 +131,5 @@ public class Graph<S, T> {
      * @param measure The measure for how to determine the cost
      *                of an edge.
      */
-    public double getTotalCost(IEdgeMeasure<T> measure) {
-        double totalCost = 0.0;
-
-        for (Vertex<S, T> v: labelToVertex.values()) {
-            for (Edge<T> e: v.vertexToEdge.values()) {
-                totalCost += measure.getCost(e.data);
-            }
-        }
-
-        return totalCost;
-    }
+    public double getTotalCost(EdgeMeasure<T> measure);
 }

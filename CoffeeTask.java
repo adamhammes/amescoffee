@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A few methods Jim plans on using to fix his coffee problems.
  */
-public interface ICoffeeTask {
+public interface CoffeeTask {
     /**
      * You must construct a graph representing the ingredient
      * dependencies specified in the homework and then use
