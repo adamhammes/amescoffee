@@ -10,6 +10,10 @@ public class Vertex<S, T> {
     public final Map<Vertex<S, T>, Edge<T>> vertexToEdge = new HashMap<Vertex<S, T>, Edge<T>>();
 
     public Vertex(String label, S data) {
+        if (null == label || null == label) {
+            throw new NullPointerException("Vertices may not have null label or data");
+        }
+
         this.label = label;
         this.data = data;
     }
@@ -32,5 +36,24 @@ public class Vertex<S, T> {
 
     public Collection<Vertex<S, T>> getNeighbors() {
         return vertexToEdge.keySet();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (null == other) {
+            return false;
+        }
+
+        if (!(other instanceof Vertex)) {
+            return false;
+        }
+
+        Vertex v = (Vertex)other;
+        return label.equals(((Vertex) other).getLabel());
+    }
+
+    @Override
+    public int hashCode() {
+        return label.hashCode();
     }
 }
