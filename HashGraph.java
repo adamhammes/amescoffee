@@ -19,6 +19,7 @@ public class HashGraph<S, T> {
     public HashGraph(boolean isDirected) {
         this.isDirected = isDirected;
     }
+
     /**
      * If this returns true, the graph is a directed
      * graph. If false, it is undirected.
@@ -53,7 +54,7 @@ public class HashGraph<S, T> {
         Vertex toRemove = labelToVertex.get(vertexLabel);
         labelToVertex.remove(toRemove.label);
 
-        for (Vertex v: labelToVertex.values()) {
+        for (Vertex v : labelToVertex.values()) {
             v.removeVertex(toRemove);
         }
     }
@@ -136,7 +137,7 @@ public class HashGraph<S, T> {
     public int getNumEdges() {
         int total = 0;
 
-        for (Vertex v: labelToVertex.values()) {
+        for (Vertex v : labelToVertex.values()) {
             total += v.vertexToEdge.size();
         }
 
@@ -169,7 +170,7 @@ public class HashGraph<S, T> {
         Collection<Vertex<S, T>> outgoingVertices = labelToVertex.get(label).getNeighbors();
         ArrayList<String> labels = new ArrayList<>();
 
-        for (Vertex<S, T> v: outgoingVertices) {
+        for (Vertex<S, T> v : outgoingVertices) {
             labels.add(v.label);
         }
 
@@ -187,7 +188,7 @@ public class HashGraph<S, T> {
 
         while (processed.size() < getNumVertices()) {
             Vertex toCheck = toProcess.iterator().next();
-            boolean hasCycle = tarjanDFS(toCheck, toProcess, processed);
+            boolean hasCycle = tarjanDFS(toCheck, toProcess, processed, toReturnReversed);
 
             if (hasCycle) {
                 return null;
@@ -201,7 +202,8 @@ public class HashGraph<S, T> {
         return toReturn;
     }
 
-    public boolean tarjanDFS(Vertex<S, T> startVertex, Set<Vertex<S, T>> toProcess, Set<Vertex<S, T>> processed) {
+    public boolean tarjanDFS(Vertex<S, T> startVertex, Set<Vertex<S, T>> toProcess, Set<Vertex<S, T>> processed,
+                             List<Vertex<S, T>> toReturnReversed) {
         return false;
     }
 
@@ -256,8 +258,8 @@ public class HashGraph<S, T> {
     public double getTotalCost(EdgeMeasure<T> measure) {
         double totalCost = 0.0;
 
-        for (Vertex<S, T> v: labelToVertex.values()) {
-            for (Edge<T> e: v.vertexToEdge.values()) {
+        for (Vertex<S, T> v : labelToVertex.values()) {
+            for (Edge<T> e : v.vertexToEdge.values()) {
                 totalCost += measure.getCost(e.data);
             }
         }
