@@ -181,7 +181,28 @@ public class HashGraph<S, T> {
      * directed acyclic graph and returns null otherwise.
      */
     public List<String> topologicalSort() {
-        return null;
+        List<Vertex<S, T>> toReturnReversed = new ArrayList<>();
+        Set<Vertex<S, T>> toProcess = new HashSet<>(labelToVertex.values());
+        Set<Vertex<S, T>> processed = new HashSet<>();
+
+        while (processed.size() < getNumVertices()) {
+            Vertex toCheck = toProcess.iterator().next();
+            boolean hasCycle = tarjanDFS(toCheck, toProcess, processed);
+
+            if (hasCycle) {
+                return null;
+            }
+        }
+        List<String> toReturn = new ArrayList<>();
+        for (int i = toReturnReversed.size() - 1; i >= 0; i--) {
+            toReturn.add(toReturnReversed.get(i).label);
+        }
+
+        return toReturn;
+    }
+
+    public boolean tarjanDFS(Vertex<S, T> startVertex, Set<Vertex<S, T>> toProcess, Set<Vertex<S, T>> processed) {
+        return false;
     }
 
     /**
