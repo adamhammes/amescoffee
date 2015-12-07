@@ -187,7 +187,7 @@ public class HashGraph<S, T> {
         Set<Vertex<S, T>> processed = new HashSet<>();
 
         while (processed.size() < getNumVertices()) {
-            Vertex toCheck = toProcess.iterator().next();
+            Vertex<S, T> toCheck = toProcess.iterator().next();
             boolean hasCycle = tarjanDFS(toCheck, toProcess, processed, toReturnReversed);
 
             if (hasCycle) {
