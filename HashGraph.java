@@ -216,7 +216,30 @@ public class HashGraph<S, T> {
 
     public boolean tarjanDFS(Vertex<S, T> startVertex, Set<Vertex<S, T>> toProcess, Set<Vertex<S, T>> processed,
                              List<Vertex<S, T>> toReturnReversed) {
-        return false;
+
+        Set<Vertex<S, T>> discovered = new HashSet<>();
+        Stack<Vertex<S, T>> stack = new Stack<>();
+        stack.push(startVertex);
+
+        while(!stack.empty()) {
+            Vertex<S, T> curVertex = stack.pop();
+
+            if (discovered.contains(curVertex)) {
+                return false;
+            }
+            if (!processed.contains(curVertex)) {
+                discovered.add(curVertex);
+
+                for (Vertex<S, T> v: curVertex.getNeighbors()) {
+                    stack.push(v);
+                }
+            }
+
+            processed.add(curVertex);
+            discovered.remove(curVertex);
+            toReturnReversed.add(curVertex);
+        }
+        return true;
     }
 
     /**
