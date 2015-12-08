@@ -95,6 +95,11 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
         return Integer.parseInt(regex(regex, line)[0]);
     }
 
+    public String[] readEdge(String line) {
+        String regex = "(\\d+),(\\d+),([^,]*)(,.*)?";
+        return regex(regex, line);
+    }
+
     public String[] regex(String regex, String string) {
         Pattern r = Pattern.compile(regex);
         Matcher m = r.matcher(string);
