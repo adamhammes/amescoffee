@@ -200,7 +200,7 @@ public class HashGraph<S, T> implements Graph<S, T> {
 
         while (processed.size() < getNumVertices()) {
             Vertex<S, T> toCheck = toProcess.iterator().next();
-            boolean hasCycle = tarjanDFS(toCheck, toProcess, processed, toReturnReversed);
+            boolean hasCycle = tarjanDFS(toCheck, processed, toReturnReversed);
 
             if (hasCycle) {
                 return null;
@@ -214,7 +214,7 @@ public class HashGraph<S, T> implements Graph<S, T> {
         return toReturn;
     }
 
-    public boolean tarjanDFS(Vertex<S, T> startVertex, Set<Vertex<S, T>> toProcess, Set<Vertex<S, T>> processed,
+    public boolean tarjanDFS(Vertex<S, T> startVertex, Set<Vertex<S, T>> processed,
                              List<Vertex<S, T>> toReturnReversed) {
 
         Set<Vertex<S, T>> discovered = new HashSet<>();
