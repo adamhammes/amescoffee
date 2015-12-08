@@ -70,6 +70,7 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
         } catch (FileNotFoundException f) {
             return null;
         }
+        Graph<String, String> amesGraph = new HashGraph<>(true);
 
         int numVertices = getNumVertices(input.nextLine());
     }
