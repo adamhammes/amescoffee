@@ -292,6 +292,10 @@ public class HashGraph<S, T> implements Graph<S, T> {
      *                of an edge.
      */
     public double getTotalCost(EdgeMeasure<T> measure) {
+        if (null == measure) {
+            throw new NullPointerException("Cannot have null measure in getTotalCost");
+        }
+
         double totalCost = 0.0;
 
         for (Vertex<S, T> v : labelToVertex.values()) {
