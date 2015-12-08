@@ -11,7 +11,7 @@ import java.util.*;
  * @param <S> The type of data stored in every VERTEX.
  * @param <T> The type of data stored in every EDGE.
  */
-public class HashGraph<S, T> {
+public class HashGraph<S, T> implements Graph<S, T> {
     private boolean isDirected = false;
 
     private Map<String, Vertex<S, T>> labelToVertex = new HashMap<>();
