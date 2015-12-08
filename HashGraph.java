@@ -265,7 +265,26 @@ public class HashGraph<S, T> implements Graph<S, T> {
             throw new IllegalArgumentException("For method shortestPath, both vertices must be in the graph");
         }
 
-        return null;
+        Vertex<S, T> source = labelToVertex.get(startLabel);
+        Vertex<S, T> dest = labelToVertex.get(destLabel);
+
+        HashMap<Vertex<S, T>, Vertex<S, T>> predecessors = dijkstra(source, dest, measure);
+        return process_predecessors(predecessors, source, dest);
+    }
+
+    private List<String> process_predecessors(HashMap<Vertex<S, T>, Vertex<S, T>> predecessors,
+                                              Vertex<S, T> source, Vertex<S, T> dest) {
+        Vertex<S, T> curVertex = dest;
+        List<String> toReturnReversed = new ArrayList<String>();
+
+        while (curVertex != source) {
+            toReturnReversed.add(curVertex.label);
+            curVertex = predecessors.get(curVertex);
+        }
+        toReturnReversed.add(source.label);
+        Collections.reverse(toReturnReversed);
+        
+        return toReturnReversed;
     }
 
     /**
