@@ -64,6 +64,8 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
     }
 
     public Graph<String, Double> readAmesFile(File amesFile) {
+        assert null != amesFile;
+
         Scanner input;
         try {
             input = new Scanner(amesFile);
