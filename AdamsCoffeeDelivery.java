@@ -63,7 +63,7 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
         return 0;
     }
 
-    public Graph<String, Double> readAmesFile(File amesFile) {
+    public Graph<String, String> readAmesFile(File amesFile) {
         Scanner input;
         try {
             input = new Scanner(amesFile);
