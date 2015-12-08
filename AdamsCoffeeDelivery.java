@@ -102,7 +102,7 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
     }
 
     public String[] readEdge(String line) {
-        String regex = "(\\d+),(\\d+),([^,]*)(,.*)?";
+        String regex = "(\\d+),(\\d+),([^,]*)";
         return regex(regex, line);
     }
 
