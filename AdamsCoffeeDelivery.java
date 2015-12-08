@@ -86,27 +86,27 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
         return amesGraph;
     }
 
-    public int getNumVertices(String line) {
+    private int getNumVertices(String line) {
         String regex = "VERTICES: (\\d+)";
         return Integer.parseInt(regex(regex, line)[0]);
     }
 
-    public String readVertex(String line) {
+    private String readVertex(String line) {
         String regex = "(.*),.*";
         return regex(regex, line)[0];
     }
 
-    public int getNumEdges(String line) {
+    private int getNumEdges(String line) {
         String regex = "EDGES: (\\d+)";
         return Integer.parseInt(regex(regex, line)[0]);
     }
 
-    public String[] readEdge(String line) {
+    private String[] readEdge(String line) {
         String regex = "(\\d+),(\\d+),([^,]*)";
         return regex(regex, line);
     }
 
-    public String[] regex(String regex, String string) {
+    private String[] regex(String regex, String string) {
         Pattern r = Pattern.compile(regex);
         Matcher m = r.matcher(string);
 
