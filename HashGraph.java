@@ -100,6 +100,10 @@ public class HashGraph<S, T> {
      * @param targetLabel The target vertex of the edge.
      */
     public T getEdgeData(String sourceLabel, String targetLabel) {
+        if (null == sourceLabel || null == targetLabel) {
+            throw new NullPointerException("getEdgeData cannot have null arguments");
+        }
+
         if (!labelToVertex.containsKey(sourceLabel) || !labelToVertex.containsKey(targetLabel)) {
             throw new IllegalArgumentException("Vertices must already be in graph to get edge data");
         }
