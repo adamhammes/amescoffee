@@ -77,6 +77,12 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
             amesGraph.addVertex(readVertex(input.nextLine()), "");
         }
 
+        int numEdges = getNumEdges(input.nextLine());
+        for (int i = 0; i < numEdges; i++) {
+            String[] data = readEdge(input.nextLine());
+            amesGraph.addEdge(data[0], data[1], Double.parseDouble(data[2]));
+        }
+
         return amesGraph;
     }
 
