@@ -79,6 +79,11 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
         return Integer.parseInt(regex(regex, line)[0]);
     }
 
+    public String readVertex(String line) {
+        String regex = "(.*),.*";
+        return regex(regex, line)[0];
+    }
+
     public String[] regex(String regex, String string) {
         Pattern r = Pattern.compile(regex);
         Matcher m = r.matcher(string);
