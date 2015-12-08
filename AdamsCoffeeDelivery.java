@@ -63,14 +63,14 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
         return 0;
     }
 
-    public Graph<String, String> readAmesFile(File amesFile) {
+    public Graph<String, Double> readAmesFile(File amesFile) {
         Scanner input;
         try {
             input = new Scanner(amesFile);
         } catch (FileNotFoundException f) {
             return null;
         }
-        Graph<String, String> amesGraph = new HashGraph<>(true);
+        Graph<String, Double> amesGraph = new HashGraph<>(true);
 
         int numVertices = getNumVertices(input.nextLine());
         for (int i = 0; i < numVertices; i++) {
