@@ -75,6 +75,10 @@ public class HashGraph<S, T> {
      * @param edgeData    The data attached to the edge.
      */
     public void addEdge(String sourceLabel, String targetLabel, T edgeData) {
+        if (null == sourceLabel || null == targetLabel || null == edgeData) {
+            throw new IllegalArgumentException("Add edge cannot take any null arguments");
+        }
+
         if (!labelToVertex.containsKey(sourceLabel) || !labelToVertex.containsKey(targetLabel)) {
             throw new IllegalArgumentException("Vertices must already be in graph to add edge");
         }
