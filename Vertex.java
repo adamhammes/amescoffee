@@ -10,7 +10,7 @@ public class Vertex<S, T> {
     public final Map<Vertex<S, T>, Edge<T>> vertexToEdge = new HashMap<Vertex<S, T>, Edge<T>>();
 
     public Vertex(String label, S data) {
-        if (null == label || null == label) {
+        if (null == label || null == data) {
             throw new NullPointerException("Vertices may not have null label or data");
         }
 
