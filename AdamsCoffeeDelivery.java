@@ -87,29 +87,43 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
     }
 
     private int getNumVertices(String line) {
+        assert null != line;
+
         String regex = "VERTICES: (\\d+)";
         return Integer.parseInt(regex(regex, line)[0]);
     }
 
     private String readVertex(String line) {
+        assert null != line;
+
         String regex = "(.*),.*";
         return regex(regex, line)[0];
     }
 
     private int getNumEdges(String line) {
+        assert null != line;
+
         String regex = "EDGES: (\\d+)";
         return Integer.parseInt(regex(regex, line)[0]);
     }
 
     private String[] readEdge(String line) {
+        assert null != line;
+
         String regex = "(\\d+),(\\d+),([^,]*)";
         return regex(regex, line);
     }
 
     private String[] regex(String regex, String string) {
+        assert null != regex && null != string;
+
         Pattern r = Pattern.compile(regex);
         Matcher m = r.matcher(string);
 
+        if (!m.matches()) {
+            throw new IllegalArgumentException("Regex \"" + regex + "\" does not match target string \""
+                                                + string + "\"");
+        }
         String[] matches = new String[m.groupCount()];
         for (int i = 0; i < matches.length; i++) {
             matches[i] = m.group(i);
