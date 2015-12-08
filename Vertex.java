@@ -7,7 +7,7 @@ import java.util.Map;
 public class Vertex<S, T> {
     public String label;
     public S data;
-    public final Map<Vertex<S, T>, Edge<T>> vertexToEdge = new HashMap<Vertex<S, T>, Edge<T>>();
+    public final Map<Vertex<S, T>, Edge<T>> vertexToEdge = new HashMap<>();
 
     public Vertex(String label, S data) {
         if (null == label || null == data) {
