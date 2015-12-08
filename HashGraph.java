@@ -87,6 +87,10 @@ public class HashGraph<S, T> {
         Vertex<S, T> dest = labelToVertex.get(targetLabel);
 
         source.addEdge(new Edge<>(source, dest, edgeData));
+
+        if (!isDirected()) {
+            dest.addEdge(new Edge<>(dest, source, edgeData));
+        }
     }
 
     /**
