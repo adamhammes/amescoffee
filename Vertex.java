@@ -45,7 +45,7 @@ public class Vertex<S, T> {
 
         return vertexToEdge.containsKey(other);
     }
-    
+
     @Override
     public boolean equals(Object other) {
         if (null == other) {
