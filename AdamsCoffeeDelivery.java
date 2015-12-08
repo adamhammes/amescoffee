@@ -90,6 +90,11 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
         return regex(regex, line)[0];
     }
 
+    public int getNumEdges(String line) {
+        String regex = "EDGES: (\\d+)";
+        return Integer.parseInt(regex(regex, line)[0]);
+    }
+
     public String[] regex(String regex, String string) {
         Pattern r = Pattern.compile(regex);
         Matcher m = r.matcher(string);
