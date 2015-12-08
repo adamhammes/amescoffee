@@ -73,6 +73,11 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
         Graph<String, String> amesGraph = new HashGraph<>(true);
 
         int numVertices = getNumVertices(input.nextLine());
+        for (int i = 0; i < numVertices; i++) {
+            amesGraph.addVertex(readVertex(input.nextLine()), "");
+        }
+
+        return amesGraph;
     }
 
     public int getNumVertices(String line) {
