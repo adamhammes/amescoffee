@@ -1,5 +1,7 @@
 package cs311.hw7;
 
+import cs311.hw7.PartitionSet.PartitionSet;
+
 import java.util.*;
 
 /**
@@ -351,7 +353,7 @@ public class HashGraph<S, T> implements Graph<S, T> {
         List<Edge<S, T>> edges = mst.removeAllEdges();
         Collections.sort(edges, new EdgeComparator<S, T>(measure));
 
-        PartitionSet<Vertex<S, T>> pSet = new ForestPartitionSet<>(mst.labelToVertex.values());
+        PartitionSet<Vertex<S, T>> pSet = new PartitionSet.ForestPartitionSet<>(mst.labelToVertex.values());
         for (Edge<S, T> e: edges) {
             if (!pSet.inSameSet(e.source, e.dest)) {
                 mst.addEdge(e.source.label, e.dest.label, e.data);

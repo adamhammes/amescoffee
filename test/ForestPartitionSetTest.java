@@ -1,6 +1,6 @@
 package cs311.hw7.test;
 
-import cs311.hw7.ForestPartitionSet;
+import cs311.hw7.PartitionSet.PartitionSet.ForestPartitionSet;
 
 import java.util.Arrays;
 import java.util.List;

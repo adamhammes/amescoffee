@@ -1,4 +1,4 @@
-package cs311.hw7;
+package cs311.hw7.PartitionSet;
 
 public interface PartitionSet<T> {
     /*
