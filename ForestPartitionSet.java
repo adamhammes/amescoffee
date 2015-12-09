@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ForestPartitionSet<T> implements PartitionSet<T> {
-    private class Node<T> {
+    private class Node {
         public T data;
         public int rank = 1;
-        public Node<T> parent;
+        public Node parent;
 
         public Node(T data) {
             this.data = data;
@@ -16,7 +16,7 @@ public class ForestPartitionSet<T> implements PartitionSet<T> {
         }
     }
 
-    private Map<T, Node<T>> valueToNode = new HashMap<>();
+    private Map<T, Node> valueToNode = new HashMap<>();
 
     public ForestPartitionSet() {}
 
@@ -26,8 +26,8 @@ public class ForestPartitionSet<T> implements PartitionSet<T> {
         }
     }
 
-    private Node<T> findRepresentative(Node<T> startNode) {
-        Node<T> curNode = startNode;
+    private Node findRepresentative(Node startNode) {
+        Node curNode = startNode;
         while (curNode != curNode.parent) {
             curNode = findRepresentative(curNode.parent);
         }
@@ -36,19 +36,19 @@ public class ForestPartitionSet<T> implements PartitionSet<T> {
 
     @Override
     public T find(T toFind) {
-        Node<T> node = valueToNode.get(toFind);
+        Node node = valueToNode.get(toFind);
         return findRepresentative(node).data;
     }
 
     @Override
     public void makeSet(T element) {
-        valueToNode.put(element, new Node<>(element));
+        valueToNode.put(element, new Node(element));
     }
 
     @Override
     public void union(T t1, T t2) {
-        Node<T> root1 = findRepresentative(valueToNode.get(t1));
-        Node<T> root2 = findRepresentative(valueToNode.get(t2));
+        Node root1 = findRepresentative(valueToNode.get(t1));
+        Node root2 = findRepresentative(valueToNode.get(t2));
 
         if (root1.rank < root2.rank) {
             root1.parent = root2;
