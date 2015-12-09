@@ -304,13 +304,12 @@ public class HashGraph<S, T> implements Graph<S, T> {
         Vertex<S, T> curVertex = dest;
         List<String> toReturnReversed = new ArrayList<>();
 
-        while (curVertex != source) {
+        while (curVertex != null) {
             toReturnReversed.add(curVertex.label);
             curVertex = predecessors.get(curVertex);
         }
-        toReturnReversed.add(source.label);
-        Collections.reverse(toReturnReversed);
 
+        Collections.reverse(toReturnReversed);
         return toReturnReversed;
     }
 
