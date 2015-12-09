@@ -7,7 +7,7 @@ import java.util.Map;
 public class ForestPartitionSet<T> implements PartitionSet<T> {
     private class Node<T> {
         public T data;
-        public int rank;
+        public int rank = 1;
         public Node<T> parent;
 
         public Node(T data) {
@@ -26,13 +26,18 @@ public class ForestPartitionSet<T> implements PartitionSet<T> {
         }
     }
 
-    @Override
-    public T find(T toFind) {
-        Node<T> curNode = valueToNode.get(toFind);
+    private Node<T> findRepresentative(Node<T> startNode) {
+        Node<T> curNode = startNode;
         while (curNode != curNode.parent) {
             curNode = curNode.parent;
         }
-        return curNode.data;
+        return curNode;
+    }
+
+    @Override
+    public T find(T toFind) {
+        Node<T> node = valueToNode.get(toFind);
+        return findRepresentative(node).data;
     }
 
     @Override
