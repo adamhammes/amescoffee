@@ -22,10 +22,6 @@ public class Vertex<S, T> {
         return label;
     }
 
-    public S getData() {
-        return data;
-    }
-
     public void removeVertex(Vertex v) {
         vertexToEdge.remove(v);
     }
@@ -42,14 +38,6 @@ public class Vertex<S, T> {
         return vertexToEdge.keySet();
     }
 
-    public boolean neighborsWith(Vertex other) {
-        if (null == other) {
-            throw new NullPointerException("Cannot use neighborsWith() with null vertex");
-        }
-
-        return vertexToEdge.containsKey(other);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (null == other) {
@@ -61,7 +49,7 @@ public class Vertex<S, T> {
         }
 
         Vertex v = (Vertex)other;
-        return label.equals(((Vertex) other).getLabel());
+        return label.equals(v.getLabel());
     }
 
     @Override
