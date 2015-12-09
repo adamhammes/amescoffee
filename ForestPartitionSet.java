@@ -29,7 +29,7 @@ public class ForestPartitionSet<T> implements PartitionSet<T> {
     private Node<T> findRepresentative(Node<T> startNode) {
         Node<T> curNode = startNode;
         while (curNode != curNode.parent) {
-            curNode = curNode.parent;
+            curNode = findRepresentative(curNode.parent);
         }
         return curNode;
     }
