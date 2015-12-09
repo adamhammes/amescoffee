@@ -39,4 +39,13 @@ public class ForestPartitionSetTest {
         pSet.union(1, 2);
         assertTrue(pSet.inSameSet(1, 2));
     }
+
+    @org.junit.Test
+    public void testMultipleUnions() {
+        pSet.union(1, 2);
+        pSet.union(3, 4);
+        assertFalse(pSet.inSameSet(1, 3));
+        pSet.union(1, 4);
+        assertTrue(pSet.inSameSet(1, 3));
+    }
 }
