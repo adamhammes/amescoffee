@@ -60,7 +60,9 @@ public class AdamsCoffeeDelivery implements CoffeeTask {
      */
     @Override
     public double getMSTCost(File amesFile) {
-        return 0;
+        Graph<String, Double> amesGraph = readAmesFile(amesFile, false);
+        Graph<String, Double> mst = amesGraph.minimumSpanningTree(new DoubleMeasure());
+        return mst.getTotalCost(new DoubleMeasure());
     }
 
     public Graph<String, Double> readAmesFile(File amesFile, boolean isDirected) {
