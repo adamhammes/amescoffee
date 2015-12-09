@@ -18,7 +18,7 @@ public class ForestPartitionSet<T> implements PartitionSet<T> {
 
     private Map<T, Node<T>> valueToNode = new HashMap<>();
 
-    public ForestPartitionSet() {};
+    public ForestPartitionSet() {}
 
     public ForestPartitionSet(Collection<? extends T> initialElements) {
         for (T t: initialElements) {
@@ -42,7 +42,7 @@ public class ForestPartitionSet<T> implements PartitionSet<T> {
 
     @Override
     public void makeSet(T element) {
-        valueToNode.put(element, new Node<T>(element));
+        valueToNode.put(element, new Node<>(element));
     }
 
     @Override
