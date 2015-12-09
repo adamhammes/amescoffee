@@ -34,6 +34,10 @@ public class Vertex<S, T> {
         vertexToEdge.put(e.source, e);
     }
 
+    public Collection<Edge<T>> outgoingEdges() {
+        return vertexToEdge.values();
+    }
+
     public Collection<Vertex<S, T>> getNeighbors() {
         return vertexToEdge.keySet();
     }
