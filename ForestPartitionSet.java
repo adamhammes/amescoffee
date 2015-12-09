@@ -20,7 +20,11 @@ public class ForestPartitionSet<T> implements PartitionSet<T> {
 
     public ForestPartitionSet() {};
 
-    public ForestPartitionSet(Collection<? extends T> initialElements) {}
+    public ForestPartitionSet(Collection<? extends T> initialElements) {
+        for (T t: initialElements) {
+            makeSet(t);
+        }
+    }
 
     @Override
     public T find(T toFind) {
@@ -43,6 +47,6 @@ public class ForestPartitionSet<T> implements PartitionSet<T> {
 
     @Override
     public boolean inSameSet(T t1, T t2) {
-        return false;
+        return find(t1).equals(find(t2));
     }
 }
