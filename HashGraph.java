@@ -302,7 +302,7 @@ public class HashGraph<S, T> implements Graph<S, T> {
     private List<String> process_predecessors(HashMap<Vertex<S, T>, Vertex<S, T>> predecessors,
                                               Vertex<S, T> source, Vertex<S, T> dest) {
         Vertex<S, T> curVertex = dest;
-        List<String> toReturnReversed = new ArrayList<String>();
+        List<String> toReturnReversed = new ArrayList<>();
 
         while (curVertex != source) {
             toReturnReversed.add(curVertex.label);
