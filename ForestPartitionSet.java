@@ -47,7 +47,17 @@ public class ForestPartitionSet<T> implements PartitionSet<T> {
 
     @Override
     public void union(T t1, T t2) {
+        Node<T> root1 = findRepresentative(valueToNode.get(t1));
+        Node<T> root2 = findRepresentative(valueToNode.get(t2));
 
+        if (root1.rank < root2.rank) {
+            root1.parent = root2;
+        } else if (root1.rank > root2.rank) {
+            root2.parent = root1;
+        } else {
+            root2.parent = root1;
+            root1.rank += 1;
+        }
     }
 
     @Override
