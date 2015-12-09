@@ -16,6 +16,10 @@ public class ForestPartitionSetTest {
         pSet = new ForestPartitionSet<>(initialElements);
     }
 
+    @org.junit.Test
+    public void testFalseInSameSet() {
+        assertFalse(pSet.inSameSet(1, 2));
+    }
 
     @org.junit.Test
     public void testSimpleFind() throws Exception {
