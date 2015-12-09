@@ -7,9 +7,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by adam on 12/8/15.
- */
 public class ForestPartitionSetTest {
     ForestPartitionSet<Integer> pSet;
 
