@@ -7,7 +7,7 @@ import java.util.Map;
 public class Vertex<S, T> {
     public String label;
     public S data;
-    public final Map<Vertex<S, T>, Edge<T>> vertexToEdge = new HashMap<>();
+    public final Map<Vertex<S, T>, Edge<S, T>> vertexToEdge = new HashMap<>();
 
     public Vertex(String label, S data) {
         if (null == label || null == data) {
@@ -30,11 +30,11 @@ public class Vertex<S, T> {
         vertexToEdge.remove(v);
     }
 
-    public void addEdge(Edge<T> e) {
+    public void addEdge(Edge<S, T> e) {
         vertexToEdge.put(e.source, e);
     }
 
-    public Collection<Edge<T>> outgoingEdges() {
+    public Collection<Edge<S, T>> outgoingEdges() {
         return vertexToEdge.values();
     }
 

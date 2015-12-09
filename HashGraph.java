@@ -282,7 +282,7 @@ public class HashGraph<S, T> implements Graph<S, T> {
         while (queue.size() > 0) {
             Vertex<S, T> curVertex = queue.remove();
 
-            for (Edge<T> edge: curVertex.outgoingEdges()) {
+            for (Edge<S, T> edge: curVertex.outgoingEdges()) {
                 double newDistance = cost.get(curVertex) + measure.getCost(edge.data);
 
                 if (newDistance < cost.get(edge.dest)) {
@@ -345,7 +345,7 @@ public class HashGraph<S, T> implements Graph<S, T> {
         double totalCost = 0.0;
 
         for (Vertex<S, T> v : labelToVertex.values()) {
-            for (Edge<T> e : v.vertexToEdge.values()) {
+            for (Edge<S, T> e : v.vertexToEdge.values()) {
                 totalCost += measure.getCost(e.data);
             }
         }

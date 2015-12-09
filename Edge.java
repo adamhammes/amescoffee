@@ -1,11 +1,11 @@
 package cs311.hw7;
 
-public class Edge<T> {
+public class Edge<S, T> {
     public T data;
-    public Vertex source;
-    public Vertex dest;
+    public Vertex<S, T> source;
+    public Vertex<S, T> dest;
 
-    public Edge(Vertex source, Vertex dest, T data) {
+    public Edge(Vertex<S, T> source, Vertex<S, T> dest, T data) {
         this.source = source;
         this.dest = dest;
         this.data = data;
