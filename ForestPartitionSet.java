@@ -1,6 +1,12 @@
 package cs311.hw7;
 
+import java.util.Collection;
+
 public class ForestPartitionSet<T> implements PartitionSet<T> {
+
+    public ForestPartitionSet() {};
+
+    public ForestPartitionSet(Collection<? extends T> initialElements) {}
 
     @Override
     public T find(T toFind) {
