@@ -3,6 +3,11 @@ package cs311.hw7;
 import java.util.Collection;
 
 public class ForestPartitionSet<T> implements PartitionSet<T> {
+    private class Node<T> {
+        public T data;
+        public int rank;
+        public Node<T> parent;
+    }
 
     public ForestPartitionSet() {};
 
