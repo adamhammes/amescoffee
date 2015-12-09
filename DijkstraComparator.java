@@ -3,10 +3,10 @@ package cs311.hw7;
 import java.util.Comparator;
 import java.util.Map;
 
-public class EdgeComparator<S, T> implements Comparator<Vertex<S, T>> {
+public class DijkstraComparator<S, T> implements Comparator<Vertex<S, T>> {
     private Map<Vertex<S, T>, Double> cost;
 
-    public EdgeComparator(Map<Vertex<S, T>, Double> cost) {
+    public DijkstraComparator(Map<Vertex<S, T>, Double> cost) {
         this.cost = cost;
     }
 

@@ -115,8 +115,7 @@ public class HashGraph<S, T> implements Graph<S, T> {
             throw new IllegalArgumentException("No edge from " + source.label + " to " + dest.label);
         }
 
-        Map<Vertex<S, T>, Edge<T>> vertexToEdge = source.vertexToEdge;
-        return vertexToEdge.get(dest).data;
+        return source.vertexToEdge.get(dest).data;
     }
 
     /**
@@ -272,6 +271,34 @@ public class HashGraph<S, T> implements Graph<S, T> {
         return process_predecessors(predecessors, source, dest);
     }
 
+    private HashMap<Vertex<S,T>,Vertex<S,T>> dijkstra(Vertex<S, T> source, Vertex<S, T> dest, EdgeMeasure<T> measure) {
+        HashMap<Vertex<S,T>,Vertex<S,T>> predecessors = new HashMap<>();
+        Map<Vertex<S,T>,Double> cost = new DefaultHashMap<>(Double.POSITIVE_INFINITY);
+        cost.put(source, 0.0);
+
+        Queue<Vertex<S, T>> queue = new PriorityQueue<>(10, new DijkstraComparator<>(cost));
+        queue.add(source);
+
+        while (queue.size() > 0) {
+            Vertex<S, T> curVertex = queue.remove();
+
+            for (Edge<T> edge: curVertex.outgoingEdges()) {
+                double newDistance = cost.get(curVertex) + measure.getCost(edge.data);
+
+                if (newDistance < cost.get(edge.dest)) {
+                    cost.put(edge.dest, newDistance);
+                    predecessors.put(edge.dest, edge.source);
+
+                    if (edge.dest.equals(dest)) {
+                        return predecessors;
+                    }
+                    queue.add(edge.dest);
+                }
+            }
+        }
+        return predecessors;
+    }
+
     private List<String> process_predecessors(HashMap<Vertex<S, T>, Vertex<S, T>> predecessors,
                                               Vertex<S, T> source, Vertex<S, T> dest) {
         Vertex<S, T> curVertex = dest;
@@ -283,7 +310,7 @@ public class HashGraph<S, T> implements Graph<S, T> {
         }
         toReturnReversed.add(source.label);
         Collections.reverse(toReturnReversed);
-        
+
         return toReturnReversed;
     }
 
