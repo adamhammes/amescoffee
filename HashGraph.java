@@ -20,6 +20,18 @@ public class HashGraph<S, T> implements Graph<S, T> {
         this.isDirected = isDirected;
     }
 
+    public HashGraph(HashGraph<S, T> other) {
+        Graph<S, T> graph = new HashGraph<S, T>(other.isDirected());
+
+        for (String s: other.getVertices()) {
+            graph.addVertex(s, other.getVertexData(s));
+        }
+
+        for (Edge<S, T> e: other.getEdges()) {
+            graph.addEdge(e.source.label, e.dest.label, e.data);
+        }
+    }
+
     /**
      * If this returns true, the graph is a directed
      * graph. If false, it is undirected.
@@ -116,6 +128,16 @@ public class HashGraph<S, T> implements Graph<S, T> {
         }
 
         return source.vertexToEdge.get(dest).data;
+    }
+
+    public Collection<Edge<S, T>> getEdges() {
+        List<Edge<S, T>> edges = new ArrayList<>();
+
+        for (Vertex<S, T> v: labelToVertex.values()) {
+            edges.addAll(v.outgoingEdges());
+        }
+
+        return edges;
     }
 
     /**
@@ -325,8 +347,30 @@ public class HashGraph<S, T> implements Graph<S, T> {
         if (null == measure) {
             throw new NullPointerException("Cannot have null measure in minimumSpanningTree");
         }
+        HashGraph<S, T> mst = new HashGraph<S, T>(this);
+        List<Edge<S, T>> edges = mst.removeAllEdges();
+        Collections.sort(edges, new EdgeComparator<S, T>(measure));
 
-        return null;
+        PartitionSet<Vertex<S, T>> pSet = new ForestPartitionSet<>(mst.labelToVertex.values());
+        for (Edge<S, T> e: edges) {
+            if (!pSet.inSameSet(e.source, e.dest)) {
+                mst.addEdge(e.source.label, e.dest.label, e.data);
+                pSet.union(e.source, e.dest);
+            }
+        }
+
+        return mst;
+    }
+
+    public List<Edge<S, T>> removeAllEdges() {
+        List<Edge<S, T>> edges = new ArrayList<>();
+
+        for (Vertex<S, T> v: labelToVertex.values()) {
+            edges.addAll(v.outgoingEdges());
+            v.vertexToEdge.clear();
+        }
+
+        return edges;
     }
 
     /**
